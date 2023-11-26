@@ -12,6 +12,10 @@ struct StarbucksCloneApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear(perform: {
+                    FavoriteService.shared = FavoriteService()
+                    HistoryService.shared = HistoryService()
+                })
         }
     }
 }

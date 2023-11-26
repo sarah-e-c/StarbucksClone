@@ -14,7 +14,7 @@ struct ProductIconView: View {
     
     var body: some View {
         VStack {
-            ProductImageView(product: product)
+            ProductImageView(product: product, size: size)
                 
             Text(product.productName)
                 .font(.caption2)
@@ -29,6 +29,6 @@ struct ProductIconView: View {
 }
 
 #Preview {
-    ProductIconView(product: Product.example, size: .SCROLLSIZE)
+    ProductIconView(product: Product.example, size: .scrollSize)
 }
 

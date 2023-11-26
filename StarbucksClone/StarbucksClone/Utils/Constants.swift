@@ -10,9 +10,14 @@ import Foundation
 
 struct Constants {
     enum IconSizes: CGFloat {
-        case SCROLLSIZE = 125.0
-        case FULLPAGESIZE = 140.0
+        case scrollSize = 125.0
+        case fullPageSize = 170.0
+        case singleFocusSize = 200.0
+        case mini = 60.0
+        case superMini = 35.0
+        case smallScrollSize = 100.0
     }
     
+
     
 }
