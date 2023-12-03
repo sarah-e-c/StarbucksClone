@@ -79,7 +79,7 @@ struct ScanView1: View {
         }
         .frame(maxHeight: 600)
         .padding()
-        Spacer()
+        //Spacer()
     }
 }
 
@@ -122,7 +122,7 @@ struct ScanView2: View {
         }
         .frame(maxHeight: 600)
         .padding()
-        Spacer()
+        //Spacer()
     }
 }
 

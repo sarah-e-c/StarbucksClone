@@ -41,6 +41,8 @@
 		F85A164A2B03C75200F15A55 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85A16492B03C75200F15A55 /* Models.swift */; };
 		F85A16782B06FC1E00F15A55 /* ProductIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85A16772B06FC1E00F15A55 /* ProductIconView.swift */; };
 		F85A167A2B06FDD800F15A55 /* ProductScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85A16792B06FDD800F15A55 /* ProductScrollView.swift */; };
+		F85DCEBE2B1C16DF002F8E73 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DCEBD2B1C16DF002F8E73 /* LaunchScreen.swift */; };
+		F85DCEC12B1C18B4002F8E73 /* launch.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F85DCEC02B1C18B4002F8E73 /* launch.jpeg */; };
 		F8842BD72B195E9C00816CBE /* stores.csv in Resources */ = {isa = PBXBuildFile; fileRef = F8842BD62B195E9C00816CBE /* stores.csv */; };
 		F8842BD92B195F3500816CBE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8842BD82B195F3500816CBE /* MapView.swift */; };
 		F8842BDB2B1960AF00816CBE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8842BDA2B1960AF00816CBE /* Location.swift */; };
@@ -111,6 +113,9 @@
 		F85A16492B03C75200F15A55 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		F85A16772B06FC1E00F15A55 /* ProductIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIconView.swift; sourceTree = "<group>"; };
 		F85A16792B06FDD800F15A55 /* ProductScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductScrollView.swift; sourceTree = "<group>"; };
+		F85DCEBD2B1C16DF002F8E73 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		F85DCEBF2B1C1749002F8E73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F85DCEC02B1C18B4002F8E73 /* launch.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch.jpeg; sourceTree = "<group>"; };
 		F8842BD62B195E9C00816CBE /* stores.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stores.csv; sourceTree = "<group>"; };
 		F8842BD82B195F3500816CBE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F8842BDA2B1960AF00816CBE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -239,6 +244,8 @@
 		F85A16352B01BB7E00F15A55 /* StarbucksClone */ = {
 			isa = PBXGroup;
 			children = (
+				F85DCEC02B1C18B4002F8E73 /* launch.jpeg */,
+				F85DCEBF2B1C1749002F8E73 /* Info.plist */,
 				F85A16762B06F65900F15A55 /* Utils */,
 				F85A16442B02667500F15A55 /* Model */,
 				F85A16452B02667B00F15A55 /* View */,
@@ -284,6 +291,7 @@
 				F852DCD92B0AEF7D008A98EF /* Offers */,
 				F852DCC22B07C0D9008A98EF /* Order */,
 				F852DCB72B07AEE8008A98EF /* Components */,
+				F85DCEBD2B1C16DF002F8E73 /* LaunchScreen.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -418,6 +426,7 @@
 				F8842BD72B195E9C00816CBE /* stores.csv in Resources */,
 				F85A163E2B01BB7F00F15A55 /* Preview Assets.xcassets in Resources */,
 				F8B3AC2A2B07226500BE39CD /* productToMessWith3.json in Resources */,
+				F85DCEC12B1C18B4002F8E73 /* launch.jpeg in Resources */,
 				F8842BDD2B19852400816CBE /* stores.json in Resources */,
 				F8F527912B1033DB00E22B26 /* history.json in Resources */,
 				F8F527762B0D19E100E22B26 /* finalgiftcarddata.json in Resources */,
@@ -467,6 +476,7 @@
 				F8B3AC2C2B07275100BE39CD /* CategoryView.swift in Sources */,
 				F852DCCC2B096E35008A98EF /* OrderView.swift in Sources */,
 				F852DCD22B0A88A4008A98EF /* TopTabView.swift in Sources */,
+				F85DCEBE2B1C16DF002F8E73 /* LaunchScreen.swift in Sources */,
 				F85A164A2B03C75200F15A55 /* Models.swift in Sources */,
 				F8842BDB2B1960AF00816CBE /* Location.swift in Sources */,
 				F852DCC42B07C14F008A98EF /* ProductView.swift in Sources */,
@@ -627,10 +637,10 @@
 				DEVELOPMENT_TEAM = TFCTVYYC79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StarbucksClone/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need to view nearby Starbucks Locations";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -657,10 +667,10 @@
 				DEVELOPMENT_TEAM = TFCTVYYC79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StarbucksClone/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need to view nearby Starbucks Locations";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

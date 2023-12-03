@@ -23,22 +23,37 @@ struct TopTabView: View {
     var body: some View {
         VStack {
             VStack {
-                HStack {
-                    ForEach(0...labels.count - 1, id:\.self) { index in
-                        Button {
-                            selectedIndex = index
-                            
-                        } label: {
-                            TabItemView(selectedIndex: $selectedIndex, index: index, label: labels[index])
+                VStack {
+                    HStack {
+                        ForEach(0...labels.count - 1, id:\.self) { index in
+                            Button {
+                                withAnimation {
+                                    selectedIndex = index
+                                }
+                                
+                            } label: {
+                                TabItemView(selectedIndex: $selectedIndex, index: index, label: labels[index])
+                            }
                         }
+                        Spacer()
                     }
-                    Spacer()
+                    HStack {
+                        Rectangle()
+                            .foregroundStyle(Color.lightgreen)
+                            .frame(width: UIScreen.screenWidth / CGFloat(labels.count), height: 3)
+                            .padding(.top, -10)
+                            .offset(x: UIScreen.screenWidth / CGFloat(labels.count) * CGFloat(selectedIndex))
+                        Spacer()
+                    }
+
+                        
                 }
                 HeaderEdgeDivider()
-                    .padding(.top, -8)
+                    .padding(.top, -13)
             }
             .padding(.bottom, -16)
             views[selectedIndex]
+                .padding(.top, -6)
             Spacer()
         }.onAppear(perform: {
             guard labels.count > 1 else {return}
@@ -64,7 +79,7 @@ private struct TabItemView: View {
                 Rectangle()
                     .foregroundStyle(Color.lightgreen)
                     .frame(height: 2)
-                    .opacity(selectedIndex == index ? 1.0 : 0.0)
+                    .opacity(0.0)
             }
 
         }
