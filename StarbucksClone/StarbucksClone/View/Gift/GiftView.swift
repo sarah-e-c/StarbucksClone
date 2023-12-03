@@ -20,6 +20,7 @@ struct GiftView: View {
             }
             HeaderEdgeDivider()
                 
+                
             ScrollView {
                 HStack {
                     Image(systemName: "creditcard")
@@ -48,7 +49,7 @@ struct GiftView: View {
 
                 }
             }.background(Color.scrollbackground)
-                .padding(.top, -8)
+                .padding(.top, -10)
                 
         }
 
@@ -74,6 +75,7 @@ struct CardView: View {
             .clipShape(RoundedRectangle(cornerRadius: 10.0))
             .frame(width: size)
             .shadow(radius: 5, y:4)
+            .transition(.opacity)
     }
 }
 

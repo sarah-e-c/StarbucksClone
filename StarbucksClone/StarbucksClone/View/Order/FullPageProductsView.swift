@@ -10,6 +10,7 @@ import SwiftUI
 struct FullPageProductsView: View {
     @ObservedObject var vm: MenuViewModel
     @ObservedObject var sheetManager = SheetManager.shared
+    @ObservedObject var storeAndCartVm: StoreAndCartViewModel
     
     let products: [Product]
     let title: String
@@ -21,7 +22,13 @@ struct FullPageProductsView: View {
     ]
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.largeTitle)
+                .bold()
+                .padding()
+            HeaderEdgeDivider()
+                
             ScrollView {
                 LazyVGrid(columns: columns, content: {
                     ForEach(products) { product in
@@ -33,10 +40,11 @@ struct FullPageProductsView: View {
                         }
                     }
                 }).padding(.horizontal)
-            }.navigationTitle(title)
-                .navigationBarTitleDisplayMode(.large)
+                    .padding(.top)
+            }.background(Color.scrollbackground).padding(.top, -10)
+                
 
-            StoreAndCartView(vm: StoreAndCartViewModel())
+            StoreAndCartView(vm: storeAndCartVm)
         }
 
     }
@@ -44,7 +52,7 @@ struct FullPageProductsView: View {
 
 #Preview {
     NavigationStack {
-        FullPageProductsView(vm: MenuViewModel(), products: ProductService.shared.getAllProductsInSubcategory(subCategory: "Lattes"), title: "Lattes")
+        FullPageProductsView(vm: MenuViewModel(), storeAndCartVm: StoreAndCartViewModel(), products: ProductService.shared.getAllProductsInSubcategory(subCategory: "Lattes"), title: "Lattes")
     }
     
 }

@@ -37,10 +37,10 @@ struct ThanksForOrderView: View {
                 
             HeaderEdgeDivider()
                 .padding(.horizontal, -15)
-            Text("Franklin St. and Columbia St.")
+            Text(vm.selectedLocation?.name ?? "")
                 .bold()
                 .padding(.top)
-            Text("13306 A St. John's Church Road")
+            Text(vm.selectedLocation?.street1 ?? "")
                 .padding(.bottom)
             Image("ordermap")
                 .resizable()

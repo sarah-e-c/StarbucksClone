@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ScanView: View {
+    @ObservedObject var vm: UserDataViewModel
     var body: some View {
         VStack{
             HStack {
-                Text("69")
+                Text("\(vm.stars)")
                     .padding(.trailing, -4)
                     .bold()
                 Image(systemName: "star.fill")
@@ -25,16 +26,18 @@ struct ScanView: View {
                     .opacity(0.5)
                     .font(.title3)
             }.padding()
-            TopTabView(labels: ["Scan & pay", "Scan only"], views: [ScanView1(), ScanView2()])
+            TopTabView(labels: ["Scan & pay", "Scan only"], views: [ScanView1(vm: vm), ScanView2()])
         }.background(Color.scrollbackground)
+            .onAppear(perform: {vm.objectWillChange.send()})
 
     }
 }
 
 struct ScanView1: View {
+    @ObservedObject var vm: UserDataViewModel
     var body: some View {
         BaseCardView(cornerRadius: 25.0) {
-            Text("$69.99")
+            Text(vm.formattedDollars)
                 .font(.title)
                 .bold()
                 .padding(.top)
@@ -124,5 +127,5 @@ struct ScanView2: View {
 }
 
 #Preview {
-    ScanView()
+    ScanView(vm: UserDataViewModel())
 }

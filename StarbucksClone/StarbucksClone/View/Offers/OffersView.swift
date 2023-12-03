@@ -27,7 +27,7 @@ struct OffersView: View {
                         .padding(.bottom, -30)
                     Offer2View()
                 }
-            }.padding(.top, -8)
+            }.padding(.top, -10)
 
         }.background(Color.scrollbackground)
 

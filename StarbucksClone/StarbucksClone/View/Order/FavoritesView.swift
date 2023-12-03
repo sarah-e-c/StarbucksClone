@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavoritesView: View {
     @ObservedObject var vm: MenuViewModel
+    @ObservedObject var storeAndCartVm: StoreAndCartViewModel
     var body: some View {
         Group{
             if vm.getFavoriteProducts().isEmpty {
@@ -31,9 +32,9 @@ struct FavoritesView: View {
                 
             } else {
                 ScrollView {
-                    VStack(alignment: .leading) {
+                    LazyVStack(alignment: .leading) {
                         ForEach(vm.getFavoriteProducts().reversed(), id: \.id) {product in
-                            ProductRectangleView(isLight: true, product: product, vm: StoreAndCartViewModel())
+                            ProductRectangleView(isLight: true, product: product, vm: storeAndCartVm)
                                 .padding(.horizontal)
                             Divider()
                         }
@@ -45,5 +46,5 @@ struct FavoritesView: View {
 }
 
 #Preview {
-    FavoritesView(vm: MenuViewModel())
+    FavoritesView(vm: MenuViewModel(), storeAndCartVm: StoreAndCartViewModel())
 }

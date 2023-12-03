@@ -56,17 +56,22 @@ struct ProductInfoAndButtons: View {
         VStack(alignment: .leading) {
             Text(product.product.productName)
                 .font(.title2)
+                .padding(.bottom, 8)
             Text("\(product.sizeOption?.rawValue ?? "") \(isLight ? "" : sizeOptionToSize[product.sizeOption ?? .grande] ?? "")")
+                .font(.caption)
             ForEach(product.modifiedOptions, id:\.id) {option in
                 Text(option.label)
+                    .font(.caption)
             }
             Text("\(product.product.productCalories ?? "") Calories")
                 .opacity(0.6)
+                .font(.caption)
             if !isLight {
                 ZStack {
-                    Text("200    item")
-                    Image(systemName: "star.fill")
+                    Text("200     item")
                         .font(.caption)
+                    Image(systemName: "star.fill")
+                        .font(.caption2)
                         .offset(CGSize(width: -3.0, height: 0))
                 } .opacity(0.6)
                     
@@ -83,15 +88,15 @@ struct ProductInfoAndButtons: View {
                 } label: {
                     Image(systemName: vm.isProductFavorited(product: product) ? "heart.fill" : "heart")
                         .foregroundStyle(vm.isProductFavorited(product: product) ? .green : .black)
-                        .opacity(isHeartShowing ? 1.0 : 0.99)
-                }
+                        .opacity(vm.isProductFavorited(product: product) ? 1.0 : 0.5)
+                }.padding(.trailing)
                 Button {
                     vm.addProduct(product: product)
                 } label: {
                     Image(systemName: "plus.circle")
                         .foregroundStyle(.black)
                         .opacity(0.5)
-                }
+                }.padding(.trailing)
                 if !isLight {
                     Button {
                         vm.removeProduct(product: product)
@@ -102,6 +107,7 @@ struct ProductInfoAndButtons: View {
                     }
                 }
             }.padding(.top)
+                .font(.title2)
         }
     }
 }

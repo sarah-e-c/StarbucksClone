@@ -6,21 +6,25 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
     @State private var selection = 0
+    @StateObject private var storeAndCartVM = StoreAndCartViewModel()
+    
+
     var body: some View {
         TabView(selection: $selection) {
-                HomeView(selectedTab: $selection)
+            HomeView(selectedTab: $selection, vm: UserDataViewModel())
                     .tabItem { TabLabel(image: Image(systemName: "house.fill"), name: "Home") }
                     .tag(0)
-                ScanView()
+            ScanView(vm: UserDataViewModel())
                     .tabItem { TabLabel(image: Image(systemName: "qrcode"), name: "Scan") }
                     .tag(1)
                 
                 //order view
                 NavigationStack {
-                    OrderView()
+                    OrderView(storeAndCartVM: storeAndCartVM)
                 }.tabItem { TabLabel(image: Image(systemName: "cup.and.saucer"), name: "Order") }
                 .tag(2)
             NavigationStack {
@@ -38,6 +42,9 @@ struct ContentView: View {
                     .tag(4)
             
             }.accentColor(Color("green"))
+            .onAppear(perform: {
+                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Code@*/ /*@END_MENU_TOKEN@*/
+            })
     }
 }
 

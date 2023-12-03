@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Binding var selectedTab: Int
+    @ObservedObject var vm: UserDataViewModel
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
@@ -17,7 +18,7 @@ struct HomeView: View {
                     .padding(.bottom, -20)
                 CustomScrollView {
                     Group {
-                        StarsView()
+                        StarsView(vm: vm)
                         VStack {
                             Offer1View()
                                 .padding(.bottom, -30)
@@ -44,7 +45,7 @@ struct HomeView: View {
             }
             ScanInStoreButton(selection: $selectedTab)
             
-        }
+        }.onAppear(perform: {vm.objectWillChange.send()})
 
 
     }
@@ -90,13 +91,13 @@ private struct HomeToolbar: View {
 }
 
 private struct StarsView: View {
-    let numStars = 69
+    @ObservedObject var vm: UserDataViewModel
     var body: some View {
         VStack {
             HStack {
                 VStack {
                     HStack {
-                        Text("69")
+                        Text("\(vm.stars)")
                             .font(.title)
                             .bold()
                         Image(systemName: "star.fill")
@@ -117,7 +118,7 @@ private struct StarsView: View {
             
            
             Image(systemName: "arrowtriangle.down.fill")
-                .offset(x:((CGFloat(UIScreen.screenWidth) * (CGFloat(numStars) - (UIScreen.screenWidth / 2)) / 400) + 9), y: 15)
+                .offset(x:((CGFloat(UIScreen.screenWidth) * (CGFloat(vm.stars) - (UIScreen.screenWidth / 2)) / 400) + 9), y: 15)
                 .foregroundStyle(Color("green"))
             
 
@@ -128,19 +129,19 @@ private struct StarsView: View {
                 HStack {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundStyle(Color("lightgreen"))
-                        .frame(width: CGFloat(UIScreen.screenWidth) * CGFloat(numStars) / 400, height: 4 )
+                        .frame(width: CGFloat(UIScreen.screenWidth) * CGFloat(vm.stars) / 400, height: 4 )
                     Spacer()
                 }
                 HStack {
-                    StarCheckpointView(numStars: 69, starCheckpoint: 25)
+                    StarCheckpointView(numStars: vm.stars, starCheckpoint: 25)
                     Spacer()
-                    StarCheckpointView(numStars: 69, starCheckpoint: 100)
+                    StarCheckpointView(numStars: vm.stars, starCheckpoint: 100)
                     Spacer()
-                    StarCheckpointView(numStars: 69, starCheckpoint: 200)
+                    StarCheckpointView(numStars: vm.stars, starCheckpoint: 200)
                     Spacer()
-                    StarCheckpointView(numStars: 69, starCheckpoint: 300)
+                    StarCheckpointView(numStars: vm.stars, starCheckpoint: 300)
                     Spacer()
-                    StarCheckpointView(numStars: 69, starCheckpoint: 400)
+                    StarCheckpointView(numStars: vm.stars, starCheckpoint: 400)
                 }.padding(.horizontal)
                                 
 

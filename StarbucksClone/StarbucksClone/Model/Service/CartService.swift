@@ -58,6 +58,10 @@ class CartService: ObservableObject {
         }
     }
     
+    var costOfCart: Int {
+        return cart.count * 625
+    }
+    
     static var shared = CartService()
     
 }

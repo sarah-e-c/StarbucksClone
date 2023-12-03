@@ -11,6 +11,14 @@ class MenuViewModel: ObservableObject {
     let products: Products
     var currentProduct: Product
     
+    
+    var formattedDollarAmount: String {
+        StarAndMoneyService.shared.formattedDollars
+    }
+    var stars: Int {
+        StarAndMoneyService.shared.stars
+    }
+    
     init() {
         products = ProductService.shared.products
         currentProduct = products[0]

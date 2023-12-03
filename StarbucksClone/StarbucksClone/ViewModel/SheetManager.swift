@@ -13,6 +13,7 @@ class SheetManager: ObservableObject {
     @Published var alternateProductSheetShowing = false
     @Published var confirmOrderSheetShowing = false
     @Published var thankYouSheetShowing  = false
+    @Published var confirmOrderCartSheetShowing = false
     
     static var shared = SheetManager()
     
@@ -30,18 +31,39 @@ class SheetManager: ObservableObject {
             }
             
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { _ in
+                self.confirmOrderCartSheetShowing = true
                 self.confirmOrderSheetShowing = true
                 self.thankYouSheetShowing = false
                 self.alternateProductSheetShowing = false
             })
         } else {
+            self.confirmOrderCartSheetShowing = true
             self.productSheetShowing = false
             self.confirmOrderSheetShowing = true
             self.thankYouSheetShowing = false
             self.alternateProductSheetShowing = false
-            
         }
-
+    }
+    func showMapSheet() {
+        print("showing map sheet now...")
+        if productSheetShowing {
+            withAnimation {
+                productSheetShowing = false
+            }
+            
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { _ in
+                self.confirmOrderCartSheetShowing = false
+                self.confirmOrderSheetShowing = true
+                self.thankYouSheetShowing = false
+                self.alternateProductSheetShowing = false
+            })
+        } else {
+            self.confirmOrderCartSheetShowing = false
+            self.productSheetShowing = false
+            self.confirmOrderSheetShowing = true
+            self.thankYouSheetShowing = false
+            self.alternateProductSheetShowing = false
+        }
     }
     
     func showThankYouSheet() {

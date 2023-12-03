@@ -27,6 +27,7 @@ struct TopTabView: View {
                     ForEach(0...labels.count - 1, id:\.self) { index in
                         Button {
                             selectedIndex = index
+                            
                         } label: {
                             TabItemView(selectedIndex: $selectedIndex, index: index, label: labels[index])
                         }

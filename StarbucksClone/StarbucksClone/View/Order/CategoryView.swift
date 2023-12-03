@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CategoryView: View {
     @ObservedObject var vm: MenuViewModel
+    @ObservedObject var storeAndCartVm: StoreAndCartViewModel
     let category: ProductCategory
     
     var body: some View {
@@ -31,15 +32,15 @@ struct CategoryView: View {
                 { subCategory in
                     Group {
                         if let subCategoryUnrapped: String = subCategory {
-                            ProductScrollView(vm: vm, products: vm.getAllProductsInSubCategory(subCategory: subCategoryUnrapped, category: category), title: subCategoryUnrapped)
+                            ProductScrollView(vm: vm, storeAndCartVm: storeAndCartVm, products: vm.getAllProductsInSubCategory(subCategory: subCategoryUnrapped, category: category), title: subCategoryUnrapped)
                             Divider()
                         }
                     }
                     
                 }
             }
-            StoreAndCartView(vm: StoreAndCartViewModel())
-        }.background(Color.scrollbackground)
+            StoreAndCartView(vm: storeAndCartVm)
+        }.background(Color.scrollbackground).padding(.top, -12)
         
 
     }
@@ -47,7 +48,7 @@ struct CategoryView: View {
 
 #Preview {
     NavigationStack {
-        CategoryView(vm: MenuViewModel(), category: .bakery)
+        CategoryView(vm: MenuViewModel(), storeAndCartVm: StoreAndCartViewModel(), category: .bakery)
     }
     
 }

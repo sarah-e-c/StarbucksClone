@@ -9,17 +9,18 @@ import SwiftUI
 
 struct MenuView: View {
     @StateObject var vm: MenuViewModel
+    @ObservedObject var storeAndCartVm: StoreAndCartViewModel
     var body: some View {
         ScrollView {
                 ForEach(vm.bigCategories, id: \.self) { bigCategory in
-                    VStack {
+                    VStack() {
                     HStack {
                         Text(bigCategory.rawValue)
-                            .font(.title3)
+                            .font(.title2)
                             .bold()
                         Spacer()
                         NavigationLink {
-                            FullPageProductsView(vm: vm, products: vm.getAllBigCategoryProducts(bigCategory: bigCategory), title: bigCategory.rawValue)
+                            FullPageProductsView(vm: vm, storeAndCartVm: storeAndCartVm, products: vm.getAllBigCategoryProducts(bigCategory: bigCategory), title: bigCategory.rawValue)
                         } label: {
                             Text("See all \(vm.getAllBigCategoryProducts(bigCategory: bigCategory).count)")
                                 .bold()
@@ -29,17 +30,20 @@ struct MenuView: View {
                         ForEach(vm.getAllCategoriesInBigCategory(bigCategory: bigCategory), id: \.self) {category in
                             HStack {
                                 NavigationLink {
-                                    Group {
-                                        if vm.categoryHasSubcategories(category: category) {
-                                            CategoryView(vm: vm, category: category)
-                                        } else {
-                                            FullPageProductsView(vm: vm, products: vm.getAllProductsInCategory(category: category), title: category.rawValue)
-                                        }
+                                    if vm.categoryHasSubcategories(category: category) {
+                                        CategoryView(vm: vm, storeAndCartVm: storeAndCartVm, category: category)
+                                    } else {
+                                        FullPageProductsView(vm: vm, storeAndCartVm: storeAndCartVm, products: vm.getAllProductsInCategory(category: category), title: category.rawValue)
                                     }
                                 } label: {
                                     ProductImageView(product: vm.getFirstCategoryProduct(category: category), size: .mini)
+                                
                                     Text(category.rawValue)
                                         .foregroundStyle(Color.black)
+                                        .font(.title3)
+                                        .multilineTextAlignment(.leading)
+                                    
+                                    
                                     Spacer()
                                 }
                                 
@@ -48,11 +52,12 @@ struct MenuView: View {
                     }
                 }
         }.background(Color.scrollbackground)
+            
     }
 }
 
 #Preview {
     NavigationStack {
-        MenuView(vm: MenuViewModel())
+        MenuView(vm: MenuViewModel(), storeAndCartVm: StoreAndCartViewModel())
     }
 }

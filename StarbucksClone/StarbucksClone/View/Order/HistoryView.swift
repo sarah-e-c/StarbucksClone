@@ -9,10 +9,11 @@ import SwiftUI
 
 struct HistoryView: View {
     @ObservedObject var vm: MenuViewModel
+    @ObservedObject var storeAndCartVm: StoreAndCartViewModel
     var body: some View {
         ScrollView {
             
-            VStack(alignment: .leading)  {
+            LazyVStack(alignment: .leading)  {
             if vm.getHistory().isEmpty {
                 Image("nohistory")
                     .resizable()
@@ -45,10 +46,10 @@ struct HistoryView: View {
                         .background(Color.darkgray)
                     VStack {
                         ForEach(order.products.indices.dropLast(), id: \.self) {i in
-                            ProductRectangleView(isLight: true, product: order.products[i], vm: StoreAndCartViewModel())
+                            ProductRectangleView(isLight: true, product: order.products[i], vm: storeAndCartVm)
                             Divider()
                         }
-                        ProductRectangleView(isLight: false, product: order.products.last!, vm: StoreAndCartViewModel())
+                        ProductRectangleView(isLight: false, product: order.products.last!, vm: storeAndCartVm)
                     }
                 }
             }
@@ -59,5 +60,5 @@ struct HistoryView: View {
 }
 
 #Preview {
-    HistoryView(vm: MenuViewModel())
+    HistoryView(vm: MenuViewModel(), storeAndCartVm: StoreAndCartViewModel())
 }

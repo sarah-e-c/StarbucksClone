@@ -20,10 +20,10 @@ struct ConfirmOrderView: View {
         ZStack {
             VStack {
                 VStack(alignment: .leading) {
-                    ToolbarView(isFullShowing: isFullShowing)
+                    ToolbarView(vm: vm, isFullShowing: isFullShowing)
                     Group {
                         if isFullShowing {
-                            FullToolbarView()
+                            FullToolbarView(vm: vm)
                         }
                     }
                 }.padding().background(Color.darkgreen)
@@ -98,13 +98,13 @@ struct ConfirmOrderView: View {
                             vm.checkout()
                             sheetManager.showThankYouSheet()
                         } label: {
-                            GreenButton(String(format: "Checkout $%.02f", (6.25 * Double(vm.numProducts))))
+                            GreenButton("Checkout \(vm.formattedCost)")
                         }
                     }
                 }
             }
         }.sheet(isPresented: $sheetManager.alternateProductSheetShowing, content: {
-            ProductView(vm: ProductViewModel(product: vm.currentProduct), isAlternate: true)
+            ProductView(vm: ProductViewModel(product: vm.currentProduct), storeAndCartVm: vm, isAlternate: true)
         }).sheet(isPresented: $sheetManager.thankYouSheetShowing) {
             ThanksForOrderView(vm: vm)
         }
@@ -121,6 +121,7 @@ struct ConfirmOrderView: View {
 }
 
 private struct ToolbarView: View {
+    @ObservedObject var vm: StoreAndCartViewModel
     @Environment(\.dismiss) var dismiss
     let isFullShowing: Bool
     var body: some View {
@@ -141,7 +142,7 @@ private struct ToolbarView: View {
                     Spacer()
                 }
             }
-            Text("2")
+            Text("\(vm.stars)")
             Image(systemName: "star.fill")
                 .font(.caption)
         }
@@ -149,8 +150,9 @@ private struct ToolbarView: View {
 }
 
 private struct FullToolbarView: View {
+    @ObservedObject var vm: StoreAndCartViewModel
     var body: some View {
-        Text("Review Order (2)")
+        Text("Review Order (\(vm.numProducts))")
             .font(.title2)
             .bold()
             .padding(.top)
@@ -162,7 +164,7 @@ private struct FullToolbarView: View {
                     Text("Pickup store")
                         .font(.caption)
                         .opacity(0.7)
-                    Text("Franklin St & Columbia St: 0.6 mi")
+                    Text("\(vm.selectedLocation?.name ?? "No location selected"):  \(vm.getFormattedLocationDistanceFromUserLocation(lat: Double(vm.selectedLocation?.latitude ?? "") ?? vm.CHAPEL_HILL_LATITUDE, long: Double(vm.selectedLocation?.longitude ?? "") ?? vm.CHAPEL_HILL_LONGITUDE)) km")
                     
                 }.foregroundColor(.white)
                 Spacer()

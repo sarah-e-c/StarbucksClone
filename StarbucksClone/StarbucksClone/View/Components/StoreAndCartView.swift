@@ -21,23 +21,28 @@ struct StoreAndCartView: View {
                 MessageView(vm: vm)
                 
                 HStack {
-                    VStack {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Pickup store")
+                    Button {
+                        sheetManager.showMapSheet()
+                    } label: {
+                        VStack {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Pickup store")
+                                        .font(.caption)
+                                        .opacity(0.7)
+                                    Text(vm.selectedLocation?.name ?? "No location selected")
+                                    
+                                }.foregroundColor(.white)
+                                    .padding()
+                                Spacer()
+                                Image(systemName: "chevron.down")
                                     .font(.caption)
-                                    .opacity(0.7)
-                                Text("Franklin St & Columbia St: 0.6 mi")
-                                
-                            }.foregroundColor(.white)
-                                .padding()
-                            Spacer()
-                            Image(systemName: "chevron.down")
-                                .font(.caption)
-                                .padding(.top)
+                                    .padding(.top)
+                            }
+                            Rectangle().foregroundStyle(.white).frame(height: 1).opacity(0.3).offset(x:0, y:-10)
                         }
-                        Rectangle().foregroundStyle(.white).frame(height: 1).opacity(0.3).offset(x:0, y:-10)
                     }
+
                     Button {
                         sheetManager.showConfirmOrderSheet()
                         
@@ -78,7 +83,15 @@ struct StoreAndCartView: View {
             }.offset(x:165, y:-50)
         }.padding(.top, -8)
             .sheet(isPresented: $sheetManager.confirmOrderSheetShowing, content: {
-                ConfirmOrderView(vm: vm)
+                Group {
+                    if sheetManager.confirmOrderCartSheetShowing {
+                        ConfirmOrderView(vm: vm)
+                    } else {
+                        MapView(vm: vm)
+                    }
+                    
+                }
+                
             })
     }
 }

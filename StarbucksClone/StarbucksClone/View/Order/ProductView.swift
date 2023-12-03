@@ -11,14 +11,18 @@ struct ProductView: View {
     @ObservedObject var vm: ProductViewModel
     @Environment(\.dismiss) var dismiss
     @State private var isHeartShowing = false
+    @ObservedObject var storeAndCartVm: StoreAndCartViewModel
     let isAlternate: Bool
-    init(vm: ProductViewModel) {
+    init(vm: ProductViewModel, storeAndCartVm: StoreAndCartViewModel) {
         self.vm = vm
         isAlternate = false
+        self.storeAndCartVm = storeAndCartVm
     }
-    init(vm: ProductViewModel, isAlternate: Bool) {
+    
+    init(vm: ProductViewModel, storeAndCartVm: StoreAndCartViewModel, isAlternate: Bool) {
         self.vm = vm
         self.isAlternate = isAlternate
+        self.storeAndCartVm = storeAndCartVm
     }
     
     
@@ -120,7 +124,7 @@ struct ProductView: View {
                     }.background(Color.white)
                 }
                 if !isAlternate {
-                    StoreAndCartView(vm: StoreAndCartViewModel())
+                    StoreAndCartView(vm: storeAndCartVm)
                 }
             }
             AddToOrderButton(vm: vm)
@@ -329,7 +333,7 @@ private struct StepperOptionView: View {
 
 
 #Preview {
-    ProductView(vm: ProductViewModel(product: Product.example))
+    ProductView(vm: ProductViewModel(product: Product.example), storeAndCartVm: StoreAndCartViewModel())
 }
 
 

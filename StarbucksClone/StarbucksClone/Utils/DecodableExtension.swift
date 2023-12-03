@@ -21,12 +21,17 @@ extension Bundle {
         let formatter = DateFormatter()
         formatter.dateFormat = "y-MM-dd"
         decoder.dateDecodingStrategy = .formatted(formatter)
-
-        guard let loaded = try? decoder.decode(T.self, from: data) else {
-            fatalError("Failed to decode \(file) from bundle.")
+        do {
+            let loaded = try decoder.decode(T.self, from: data)
+            return loaded
+        } catch {
+            print("Error decoding json \(error)")
+            fatalError("Error decoding json")
+            
         }
-
-        return loaded
+        
+        
+       
     }
     
     func decodeTemp<T: Codable>(_ file: String) -> T {

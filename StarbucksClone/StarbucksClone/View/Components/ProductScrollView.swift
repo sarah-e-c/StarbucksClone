@@ -10,6 +10,7 @@ import SwiftUI
 struct ProductScrollView: View {
     @ObservedObject var vm: MenuViewModel
     @ObservedObject var sheetManager = SheetManager.shared
+    @ObservedObject var storeAndCartVm: StoreAndCartViewModel
     var products: [Product]
     var title: String
     
@@ -21,7 +22,7 @@ struct ProductScrollView: View {
                     .bold()
                 Spacer()
                 NavigationLink {
-                    FullPageProductsView(vm: vm, products: products, title: title)
+                    FullPageProductsView(vm: vm, storeAndCartVm: storeAndCartVm, products: products, title: title)
                 } label: {
                     Text("See all \(products.count)")
                         .bold()
@@ -54,14 +55,14 @@ struct ProductScrollView: View {
             }
             
         }.sheet(isPresented: $sheetManager.productSheetShowing, content: {
-            ProductView(vm: ProductViewModel(product: vm.currentProduct))
+            ProductView(vm: ProductViewModel(product: vm.currentProduct), storeAndCartVm: storeAndCartVm)
         })
     }
 }
 
 #Preview {
     NavigationStack {
-        ProductScrollView(vm: MenuViewModel(), products: ProductService.shared.getAllProductsInSubcategory(subCategory: "Lattes"), title: "Lattes")
+        ProductScrollView(vm: MenuViewModel(), storeAndCartVm: StoreAndCartViewModel(), products: ProductService.shared.getAllProductsInSubcategory(subCategory: "Lattes"), title: "Lattes")
     }
     
 }
